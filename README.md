@@ -114,13 +114,13 @@ methods while keeping third-party HTTP types out of the public API.
 
 Rust 1.88 is the MSRV. The exact local commands are in [AGENTS.md](AGENTS.md); they cover formatting,
 strict Clippy, rustdoc, tests, all four feature combinations, MSRV, OpenAPI reconciliation,
-packaging, and dependency/license policy. [COMPATIBILITY.md](COMPATIBILITY.md) distinguishes local
-release-candidate evidence from the immutable-image evidence required to publish.
+packaging, and dependency/license policy. [COMPATIBILITY.md](COMPATIBILITY.md) records the verified immutable server image,
+exact source revisions and hosted acceptance evidence.
 
 ## Coordinated operator workflows
 
 The current unreleased contract includes catalog schema 2, exact target/revision reconciliation,
 software status, release withdrawal, worker draining, and bounded reconnecting run watches.
-See the server's [operator workflow guide](../stabbur/docs/operator-workflows.md) and the independent
-[management console](../stabbur-frontend/README.md). Schema 1 catalogs remain accepted without targets.
+See the server's [operator workflow guide](https://github.com/terjekv/stabbur/blob/main/docs/operator-workflows.md) and the independent
+[management console](https://github.com/terjekv/stabbur-frontend). Schema 1 catalogs remain accepted without targets.
 Local cross-repository integration does not replace immutable released-image acceptance.

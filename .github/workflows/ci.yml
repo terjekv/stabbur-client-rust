@@ -17,7 +17,7 @@ permissions:
 env:
   CARGO_TERM_COLOR: always
   STABBUR_TARGET_SERVER_VERSION: 0.1.0
-  STABBUR_TARGET_SERVER_IMAGE: pending-server-release
+  STABBUR_TARGET_SERVER_IMAGE: ghcr.io/terjekv/stabbur-server@sha256:19a0c843a1622173f8efd3012ddd223a93c8f487a6e5c003b3de2f3387d7f723
 
 jobs:
   quality:

@@ -4,6 +4,8 @@
 
 ### Added
 
+- Record verified Linux amd64 server-image compatibility and exact hosted acceptance evidence.
+
 - Add validated catalog schema 2 with exact revision/append preconditions, source-pin proposals,
   software/queue summaries, worker draining and release withdrawal.
 - Add bounded typed SSE decoding with reconnect/replay and hard run deadlines.

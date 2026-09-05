@@ -1,26 +1,36 @@
 # Server compatibility
 
-The client, CLI, and server are independently versioned. Client 0.1.0 targets the released
-Stabbur 0.1 API shape pinned in this repository. A published compatibility claim additionally
-requires an immutable server image digest; a moving tag or local binary is not sufficient.
+The client, CLI, and server are independently versioned. Client 0.1.0 targets the Stabbur 0.1
+API shape pinned in this repository. Compatibility evidence identifies exact source commits
+and an immutable image digest; it does not declare a crates.io or tagged source release.
 
-| Client | Server target | Immutable image            | Evidence                                                                                                                       | Status            |
-| ------ | ------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
-| 0.1.0  | 0.1.0         | Pending server publication | 75-operation reconciliation, mock HTTP boundary tests, async/blocking parity, and local four-repository workflow on 2026-09-05 | Release candidate |
+| Client | Server target | Platform    | Evidence                                                         | Status         |
+| ------ | ------------- | ----------- | ---------------------------------------------------------------- | -------------- |
+| 0.1.0  | 0.1.0         | Linux amd64 | [Recorded source and image evidence](evidence/server-0.1.0.json) | Image verified |
 
-The local live workflow covers authentication, software, builder-neutral recipes and a completed
+The [publication workflow](https://github.com/terjekv/stabbur/actions/runs/33989125573) ran the independent consumer and client
+suite against this exact published image:
+
+```text
+ghcr.io/terjekv/stabbur-server@sha256:19a0c843a1622173f8efd3012ddd223a93c8f487a6e5c003b3de2f3387d7f723
+```
+
+The live consumer covers authentication, software, builder-neutral recipes and a completed
 deterministic target-triggered fake run/job, catalog scan request/cancellation,
-principal/token administration, worker provision/rotation/drain,
-streaming artifact ingestion and download, artifact HEAD and locations, stores, and audit. It does
-not replace the final test against the exact image digest.
+principal/token administration, worker provision/rotation/drain, streaming artifact ingestion
+and download, artifact HEAD and locations, stores, and audit. Mock tests additionally verify
+transport bounds, redaction, and async/blocking behavior. The pinned contract has 75 operations.
 
-Catalog manifest planning and synchronization compose the same pinned software and recipe
-operations. Catalog observations, scans, and build targets are typed parts of the pinned
-75-operation contract.
+The [macOS acceptance run](https://github.com/terjekv/stabbur/actions/runs/33988455119) separately proves source-built browser
+management, AutoPkg delivery, actual Munki installation/detection, backup restoration, crash
+recovery and withdrawal. It does not claim macOS-container or separate-host network coverage.
 
-Before publishing:
+To repeat the image check with Docker available:
 
-1. record the immutable `stabbur-server:0.1.0` image digest in `Cargo.toml` and this table;
-2. run `scripts/run-integration-tests.sh` against that digest;
-3. preserve the CI run URL or other immutable evidence; and
-4. verify the pinned OpenAPI SHA-256 remains unchanged.
+```bash
+STABBUR_INTEGRATION_SERVER_IMAGE='ghcr.io/terjekv/stabbur-server@sha256:19a0c843a1622173f8efd3012ddd223a93c8f487a6e5c003b3de2f3387d7f723' \
+  scripts/run-integration-tests.sh
+```
+
+For another server image, rerun the live suite before updating the manifest, workflow defaults,
+this matrix and the recorded evidence. Preserve the OpenAPI hash and exact tested source commits.
