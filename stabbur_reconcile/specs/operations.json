@@ -1,0 +1,529 @@
+{
+  "operations": [
+    {
+      "constant": "GET_ARTIFACT",
+      "method": "GET",
+      "operation_id": "get_artifact",
+      "path": "/api/v1/artifacts/{digest}",
+      "status": "implemented"
+    },
+    {
+      "constant": "DOWNLOAD_ARTIFACT_CONTENT",
+      "method": "GET",
+      "operation_id": "download_artifact_content",
+      "path": "/api/v1/artifacts/{digest}/content",
+      "status": "implemented"
+    },
+    {
+      "constant": "HEAD_ARTIFACT_CONTENT",
+      "method": "HEAD",
+      "operation_id": "head_artifact_content",
+      "path": "/api/v1/artifacts/{digest}/content",
+      "status": "implemented"
+    },
+    {
+      "constant": "UPLOAD_ARTIFACT_CONTENT",
+      "method": "PUT",
+      "operation_id": "upload_artifact_content",
+      "path": "/api/v1/artifacts/{digest}/content",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_ARTIFACT_LOCATIONS",
+      "method": "GET",
+      "operation_id": "list_artifact_locations",
+      "path": "/api/v1/artifacts/{digest}/locations",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_AUDIT_EVENTS",
+      "method": "GET",
+      "operation_id": "list_audit_events",
+      "path": "/api/v1/audit",
+      "status": "implemented"
+    },
+    {
+      "constant": "BOOTSTRAP",
+      "method": "POST",
+      "operation_id": "bootstrap",
+      "path": "/api/v1/auth/bootstrap",
+      "status": "implemented"
+    },
+    {
+      "constant": "LOGIN",
+      "method": "POST",
+      "operation_id": "login",
+      "path": "/api/v1/auth/login",
+      "status": "implemented"
+    },
+    {
+      "constant": "ME",
+      "method": "GET",
+      "operation_id": "me",
+      "path": "/api/v1/auth/me",
+      "status": "implemented"
+    },
+    {
+      "constant": "CHANGE_PASSWORD",
+      "method": "POST",
+      "operation_id": "change_password",
+      "path": "/api/v1/auth/password",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_PRINCIPALS",
+      "method": "GET",
+      "operation_id": "list_principals",
+      "path": "/api/v1/auth/principals",
+      "status": "implemented"
+    },
+    {
+      "constant": "CREATE_PRINCIPAL",
+      "method": "POST",
+      "operation_id": "create_principal",
+      "path": "/api/v1/auth/principals",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_PRINCIPAL",
+      "method": "GET",
+      "operation_id": "get_principal",
+      "path": "/api/v1/auth/principals/{principal}",
+      "status": "implemented"
+    },
+    {
+      "constant": "UPDATE_PRINCIPAL",
+      "method": "PATCH",
+      "operation_id": "update_principal",
+      "path": "/api/v1/auth/principals/{principal}",
+      "status": "implemented"
+    },
+    {
+      "constant": "RESET_PRINCIPAL_PASSWORD",
+      "method": "POST",
+      "operation_id": "reset_principal_password",
+      "path": "/api/v1/auth/principals/{principal}/password",
+      "status": "implemented"
+    },
+    {
+      "constant": "REVOKE_PRINCIPAL_SESSIONS",
+      "method": "POST",
+      "operation_id": "revoke_principal_sessions",
+      "path": "/api/v1/auth/principals/{principal}/revoke-sessions",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_API_TOKENS",
+      "method": "GET",
+      "operation_id": "list_api_tokens",
+      "path": "/api/v1/auth/principals/{principal}/tokens",
+      "status": "implemented"
+    },
+    {
+      "constant": "CREATE_API_TOKEN",
+      "method": "POST",
+      "operation_id": "create_api_token",
+      "path": "/api/v1/auth/principals/{principal}/tokens",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_ROLES",
+      "method": "GET",
+      "operation_id": "list_roles",
+      "path": "/api/v1/auth/roles",
+      "status": "implemented"
+    },
+    {
+      "constant": "CREATE_ROLE",
+      "method": "POST",
+      "operation_id": "create_role",
+      "path": "/api/v1/auth/roles",
+      "status": "implemented"
+    },
+    {
+      "constant": "REVOKE_API_TOKEN",
+      "method": "DELETE",
+      "operation_id": "revoke_api_token",
+      "path": "/api/v1/auth/tokens/{token}",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_BUILD_TARGETS",
+      "method": "GET",
+      "operation_id": "list_build_targets",
+      "path": "/api/v1/build-targets",
+      "status": "implemented"
+    },
+    {
+      "constant": "CREATE_BUILD_TARGET",
+      "method": "POST",
+      "operation_id": "create_build_target",
+      "path": "/api/v1/build-targets",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_BUILD_TARGET",
+      "method": "GET",
+      "operation_id": "get_build_target",
+      "path": "/api/v1/build-targets/{target}",
+      "status": "implemented"
+    },
+    {
+      "constant": "UPDATE_BUILD_TARGET",
+      "method": "PATCH",
+      "operation_id": "update_build_target",
+      "path": "/api/v1/build-targets/{target}",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_BUILD_TARGET_RUNS",
+      "method": "GET",
+      "operation_id": "list_build_target_runs",
+      "path": "/api/v1/build-targets/{target}/runs",
+      "status": "implemented"
+    },
+    {
+      "constant": "TRIGGER_BUILD_TARGET",
+      "method": "POST",
+      "operation_id": "trigger_build_target",
+      "path": "/api/v1/build-targets/{target}/runs",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_JOBS",
+      "method": "GET",
+      "operation_id": "list_jobs",
+      "path": "/api/v1/jobs",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_JOB",
+      "method": "GET",
+      "operation_id": "get_job",
+      "path": "/api/v1/jobs/{job}",
+      "status": "implemented"
+    },
+    {
+      "constant": "OPENAPI_DOCUMENT",
+      "method": "GET",
+      "operation_id": "openapi_document",
+      "path": "/api/v1/openapi.json",
+      "status": "implemented"
+    },
+    {
+      "constant": "OPERATIONAL_STATUS",
+      "status": "implemented",
+      "method": "GET",
+      "operation_id": "operational_status",
+      "path": "/api/v1/operations/status"
+    },
+    {
+      "constant": "RESOLVE_RECIPE_CATALOG_ENTRY",
+      "method": "GET",
+      "operation_id": "resolve_recipe_catalog_entry",
+      "path": "/api/v1/recipe-catalog-entries",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_RECIPE_CATALOG_SCANS",
+      "method": "GET",
+      "operation_id": "list_recipe_catalog_scans",
+      "path": "/api/v1/recipe-catalog-scans",
+      "status": "implemented"
+    },
+    {
+      "constant": "CREATE_RECIPE_CATALOG_SCAN",
+      "method": "POST",
+      "operation_id": "create_recipe_catalog_scan",
+      "path": "/api/v1/recipe-catalog-scans",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_RECIPE_CATALOG_SCAN",
+      "method": "GET",
+      "operation_id": "get_recipe_catalog_scan",
+      "path": "/api/v1/recipe-catalog-scans/{scan}",
+      "status": "implemented"
+    },
+    {
+      "constant": "CANCEL_RECIPE_CATALOG_SCAN",
+      "method": "POST",
+      "operation_id": "cancel_recipe_catalog_scan",
+      "path": "/api/v1/recipe-catalog-scans/{scan}/cancel",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_RECIPE_CATALOG_SNAPSHOTS",
+      "method": "GET",
+      "operation_id": "list_recipe_catalog_snapshots",
+      "path": "/api/v1/recipe-catalogs",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_RECIPE_CATALOG_SNAPSHOT",
+      "method": "GET",
+      "operation_id": "get_recipe_catalog_snapshot",
+      "path": "/api/v1/recipe-catalogs/{snapshot}",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_RECIPES",
+      "method": "GET",
+      "operation_id": "list_recipes",
+      "path": "/api/v1/recipes",
+      "status": "implemented"
+    },
+    {
+      "constant": "CREATE_RECIPE",
+      "method": "POST",
+      "operation_id": "create_recipe",
+      "path": "/api/v1/recipes",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_RECIPE",
+      "method": "GET",
+      "operation_id": "get_recipe",
+      "path": "/api/v1/recipes/{recipe}",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_RECIPE_REVISIONS",
+      "method": "GET",
+      "operation_id": "list_recipe_revisions",
+      "path": "/api/v1/recipes/{recipe}/revisions",
+      "status": "implemented"
+    },
+    {
+      "constant": "CREATE_RECIPE_REVISION",
+      "method": "POST",
+      "operation_id": "create_recipe_revision",
+      "path": "/api/v1/recipes/{recipe}/revisions",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_RECIPE_RUNS",
+      "method": "GET",
+      "operation_id": "list_recipe_runs",
+      "path": "/api/v1/recipes/{recipe}/runs",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_RELEASE",
+      "method": "GET",
+      "operation_id": "get_release",
+      "path": "/api/v1/releases/{release}",
+      "status": "implemented"
+    },
+    {
+      "constant": "REJECT_RELEASE",
+      "method": "POST",
+      "operation_id": "reject_release",
+      "path": "/api/v1/releases/{release}/reject",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_RELEASE_VARIANTS",
+      "method": "GET",
+      "operation_id": "list_release_variants",
+      "path": "/api/v1/releases/{release}/variants",
+      "status": "implemented"
+    },
+    {
+      "constant": "WITHDRAW_RELEASE",
+      "status": "implemented",
+      "method": "POST",
+      "operation_id": "withdraw_release",
+      "path": "/api/v1/releases/{release}/withdraw"
+    },
+    {
+      "constant": "LIST_RUNS",
+      "method": "GET",
+      "operation_id": "list_runs",
+      "path": "/api/v1/runs",
+      "status": "implemented"
+    },
+    {
+      "constant": "CREATE_RUN",
+      "method": "POST",
+      "operation_id": "create_run",
+      "path": "/api/v1/runs",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_RUN",
+      "method": "GET",
+      "operation_id": "get_run",
+      "path": "/api/v1/runs/{run}",
+      "status": "implemented"
+    },
+    {
+      "constant": "CANCEL_RUN",
+      "method": "POST",
+      "operation_id": "cancel_run",
+      "path": "/api/v1/runs/{run}/cancel",
+      "status": "implemented"
+    },
+    {
+      "constant": "STREAM_RUN_EVENTS",
+      "method": "GET",
+      "operation_id": "stream_run_events",
+      "path": "/api/v1/runs/{run}/events",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_RUN_LOGS",
+      "method": "GET",
+      "operation_id": "list_run_logs",
+      "path": "/api/v1/runs/{run}/logs",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_SOFTWARE",
+      "method": "GET",
+      "operation_id": "list_software",
+      "path": "/api/v1/software",
+      "status": "implemented"
+    },
+    {
+      "constant": "CREATE_SOFTWARE",
+      "method": "POST",
+      "operation_id": "create_software",
+      "path": "/api/v1/software",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_SOFTWARE",
+      "method": "GET",
+      "operation_id": "get_software",
+      "path": "/api/v1/software/{software}",
+      "status": "implemented"
+    },
+    {
+      "constant": "UPDATE_SOFTWARE",
+      "method": "PATCH",
+      "operation_id": "update_software",
+      "path": "/api/v1/software/{software}",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_CHANNELS",
+      "method": "GET",
+      "operation_id": "list_channels",
+      "path": "/api/v1/software/{software}/channels",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_CHANNEL",
+      "method": "GET",
+      "operation_id": "get_channel",
+      "path": "/api/v1/software/{software}/channels/{channel}",
+      "status": "implemented"
+    },
+    {
+      "constant": "PROMOTE_CHANNEL",
+      "method": "PUT",
+      "operation_id": "promote_channel",
+      "path": "/api/v1/software/{software}/channels/{channel}",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_RELEASES",
+      "method": "GET",
+      "operation_id": "list_releases",
+      "path": "/api/v1/software/{software}/releases",
+      "status": "implemented"
+    },
+    {
+      "constant": "RESOLVE_SOFTWARE",
+      "method": "GET",
+      "operation_id": "resolve_software",
+      "path": "/api/v1/software/{software}/resolve",
+      "status": "implemented"
+    },
+    {
+      "constant": "SOFTWARE_STATUS",
+      "status": "implemented",
+      "method": "GET",
+      "operation_id": "software_status",
+      "path": "/api/v1/software/{software}/status"
+    },
+    {
+      "constant": "LIST_STORES",
+      "method": "GET",
+      "operation_id": "list_stores",
+      "path": "/api/v1/stores",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_STORE",
+      "method": "GET",
+      "operation_id": "get_store",
+      "path": "/api/v1/stores/{store}",
+      "status": "implemented"
+    },
+    {
+      "constant": "TEST_STORE",
+      "method": "POST",
+      "operation_id": "test_store",
+      "path": "/api/v1/stores/{store}/test",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_WORKERS",
+      "method": "GET",
+      "operation_id": "list_workers",
+      "path": "/api/v1/workers",
+      "status": "implemented"
+    },
+    {
+      "constant": "PROVISION_WORKER",
+      "method": "POST",
+      "operation_id": "provision_worker",
+      "path": "/api/v1/workers",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_WORKER",
+      "method": "GET",
+      "operation_id": "get_worker",
+      "path": "/api/v1/workers/{worker}",
+      "status": "implemented"
+    },
+    {
+      "constant": "UPDATE_WORKER",
+      "method": "PATCH",
+      "operation_id": "update_worker",
+      "path": "/api/v1/workers/{worker}",
+      "status": "implemented"
+    },
+    {
+      "constant": "DRAIN_WORKER",
+      "status": "implemented",
+      "method": "POST",
+      "operation_id": "drain_worker",
+      "path": "/api/v1/workers/{worker}/drain"
+    },
+    {
+      "constant": "ROTATE_WORKER_TOKEN",
+      "method": "POST",
+      "operation_id": "rotate_worker_token",
+      "path": "/api/v1/workers/{worker}/rotate-token",
+      "status": "implemented"
+    },
+    {
+      "constant": "HEALTHZ",
+      "status": "implemented",
+      "method": "GET",
+      "operation_id": "healthz",
+      "path": "/healthz"
+    },
+    {
+      "constant": "READYZ",
+      "status": "implemented",
+      "method": "GET",
+      "operation_id": "readyz",
+      "path": "/readyz"
+    }
+  ]
+}

@@ -1,0 +1,1077 @@
+{
+  "openapi": "3.1.0",
+  "operations": [
+    {
+      "method": "GET",
+      "operation_id": "get_artifact",
+      "path": "/api/v1/artifacts/{digest}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "download_artifact_content",
+      "path": "/api/v1/artifacts/{digest}/content",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json",
+        "application/octet-stream"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "HEAD",
+      "operation_id": "head_artifact_content",
+      "path": "/api/v1/artifacts/{digest}/content",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "PUT",
+      "operation_id": "upload_artifact_content",
+      "path": "/api/v1/artifacts/{digest}/content",
+      "request_content_types": [
+        "application/octet-stream"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_artifact_locations",
+      "path": "/api/v1/artifacts/{digest}/locations",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_audit_events",
+      "path": "/api/v1/audit",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "bootstrap",
+      "path": "/api/v1/auth/bootstrap",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": []
+    },
+    {
+      "method": "POST",
+      "operation_id": "login",
+      "path": "/api/v1/auth/login",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": []
+    },
+    {
+      "method": "GET",
+      "operation_id": "me",
+      "path": "/api/v1/auth/me",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "change_password",
+      "path": "/api/v1/auth/password",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_principals",
+      "path": "/api/v1/auth/principals",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_principal",
+      "path": "/api/v1/auth/principals",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_principal",
+      "path": "/api/v1/auth/principals/{principal}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "PATCH",
+      "operation_id": "update_principal",
+      "path": "/api/v1/auth/principals/{principal}",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "reset_principal_password",
+      "path": "/api/v1/auth/principals/{principal}/password",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "revoke_principal_sessions",
+      "path": "/api/v1/auth/principals/{principal}/revoke-sessions",
+      "request_content_types": [],
+      "response_content_types": [],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_api_tokens",
+      "path": "/api/v1/auth/principals/{principal}/tokens",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_api_token",
+      "path": "/api/v1/auth/principals/{principal}/tokens",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_roles",
+      "path": "/api/v1/auth/roles",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_role",
+      "path": "/api/v1/auth/roles",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "DELETE",
+      "operation_id": "revoke_api_token",
+      "path": "/api/v1/auth/tokens/{token}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_build_targets",
+      "path": "/api/v1/build-targets",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_build_target",
+      "path": "/api/v1/build-targets",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_build_target",
+      "path": "/api/v1/build-targets/{target}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "PATCH",
+      "operation_id": "update_build_target",
+      "path": "/api/v1/build-targets/{target}",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_build_target_runs",
+      "path": "/api/v1/build-targets/{target}/runs",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "trigger_build_target",
+      "path": "/api/v1/build-targets/{target}/runs",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_jobs",
+      "path": "/api/v1/jobs",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_job",
+      "path": "/api/v1/jobs/{job}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "openapi_document",
+      "path": "/api/v1/openapi.json",
+      "request_content_types": [],
+      "response_content_types": [],
+      "security": []
+    },
+    {
+      "method": "GET",
+      "operation_id": "operational_status",
+      "path": "/api/v1/operations/status",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "resolve_recipe_catalog_entry",
+      "path": "/api/v1/recipe-catalog-entries",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_recipe_catalog_scans",
+      "path": "/api/v1/recipe-catalog-scans",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_recipe_catalog_scan",
+      "path": "/api/v1/recipe-catalog-scans",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_recipe_catalog_scan",
+      "path": "/api/v1/recipe-catalog-scans/{scan}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "cancel_recipe_catalog_scan",
+      "path": "/api/v1/recipe-catalog-scans/{scan}/cancel",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_recipe_catalog_snapshots",
+      "path": "/api/v1/recipe-catalogs",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_recipe_catalog_snapshot",
+      "path": "/api/v1/recipe-catalogs/{snapshot}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_recipes",
+      "path": "/api/v1/recipes",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_recipe",
+      "path": "/api/v1/recipes",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_recipe",
+      "path": "/api/v1/recipes/{recipe}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_recipe_revisions",
+      "path": "/api/v1/recipes/{recipe}/revisions",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_recipe_revision",
+      "path": "/api/v1/recipes/{recipe}/revisions",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_recipe_runs",
+      "path": "/api/v1/recipes/{recipe}/runs",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_release",
+      "path": "/api/v1/releases/{release}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "reject_release",
+      "path": "/api/v1/releases/{release}/reject",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_release_variants",
+      "path": "/api/v1/releases/{release}/variants",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "withdraw_release",
+      "path": "/api/v1/releases/{release}/withdraw",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_runs",
+      "path": "/api/v1/runs",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_run",
+      "path": "/api/v1/runs",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_run",
+      "path": "/api/v1/runs/{run}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "cancel_run",
+      "path": "/api/v1/runs/{run}/cancel",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "stream_run_events",
+      "path": "/api/v1/runs/{run}/events",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json",
+        "text/event-stream"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_run_logs",
+      "path": "/api/v1/runs/{run}/logs",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_software",
+      "path": "/api/v1/software",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_software",
+      "path": "/api/v1/software",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_software",
+      "path": "/api/v1/software/{software}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "PATCH",
+      "operation_id": "update_software",
+      "path": "/api/v1/software/{software}",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_channels",
+      "path": "/api/v1/software/{software}/channels",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_channel",
+      "path": "/api/v1/software/{software}/channels/{channel}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "PUT",
+      "operation_id": "promote_channel",
+      "path": "/api/v1/software/{software}/channels/{channel}",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_releases",
+      "path": "/api/v1/software/{software}/releases",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "resolve_software",
+      "path": "/api/v1/software/{software}/resolve",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "software_status",
+      "path": "/api/v1/software/{software}/status",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_stores",
+      "path": "/api/v1/stores",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_store",
+      "path": "/api/v1/stores/{store}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "test_store",
+      "path": "/api/v1/stores/{store}/test",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_workers",
+      "path": "/api/v1/workers",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "provision_worker",
+      "path": "/api/v1/workers",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_worker",
+      "path": "/api/v1/workers/{worker}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "PATCH",
+      "operation_id": "update_worker",
+      "path": "/api/v1/workers/{worker}",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "drain_worker",
+      "path": "/api/v1/workers/{worker}/drain",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "rotate_worker_token",
+      "path": "/api/v1/workers/{worker}/rotate-token",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "healthz",
+      "path": "/healthz",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": []
+    },
+    {
+      "method": "GET",
+      "operation_id": "readyz",
+      "path": "/readyz",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": []
+    }
+  ],
+  "server_version": "0.1.0",
+  "source_sha256": "c90cb7ca2e36d35c9653063a2d481dd1144b1cd26ea6f55a4d174ee0644bce0c"
+}

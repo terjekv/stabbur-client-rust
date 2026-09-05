@@ -1,0 +1,153 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+  STABBUR_TARGET_SERVER_VERSION: 0.1.0
+  STABBUR_TARGET_SERVER_IMAGE: pending-server-release
+
+jobs:
+  quality:
+    name: Formatting, lints, docs, and generated code
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Install Rust components
+        uses: dtolnay/rust-toolchain@2c7215f132e9ebf062739d9130488b56d53c060c # master 2026-08-04
+        with:
+          toolchain: stable
+          components: clippy,rustfmt,rust-docs
+      - name: Cache Cargo artifacts
+        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+      - name: Check generated resources
+        run: cargo run -p stabbur_reconcile --locked -- check
+      - name: Run Clippy
+        run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
+      - name: Build rustdoc
+        run: cargo doc --workspace --all-features --no-deps --locked
+        env:
+          RUSTDOCFLAGS: -D warnings
+      - name: Validate pinned OpenAPI contract
+        run: python3 scripts/openapi-contract.py validate
+      - name: Lint Markdown
+        uses: DavidAnson/markdownlint-cli2-action@21c1be1b93ad9ed58fa840aacc3f279cde2a72ff # v24
+        with:
+          config: .markdownlint.json
+          globs: "**/*.md"
+
+  test:
+    name: Unit, behavior, and consumer tests
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Install stable Rust
+        uses: dtolnay/rust-toolchain@2c7215f132e9ebf062739d9130488b56d53c060c # master 2026-08-04
+        with:
+          toolchain: stable
+      - name: Cache Cargo artifacts
+        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
+      - name: Run workspace tests
+        run: cargo test --workspace --all-features --locked
+
+  features:
+    name: Feature set (${{ matrix.name }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: no-client
+            flags: --no-default-features
+          - name: async
+            flags: --no-default-features --features async
+          - name: blocking
+            flags: --no-default-features --features blocking
+          - name: async-blocking
+            flags: --no-default-features --features async,blocking
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Install stable Rust
+        uses: dtolnay/rust-toolchain@2c7215f132e9ebf062739d9130488b56d53c060c # master 2026-08-04
+        with:
+          toolchain: stable
+      - name: Cache Cargo artifacts
+        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
+      - name: Check feature set
+        run: cargo check -p stabbur_client --locked ${{ matrix.flags }}
+
+  msrv:
+    name: MSRV
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Install Rust 1.88
+        uses: dtolnay/rust-toolchain@2c7215f132e9ebf062739d9130488b56d53c060c # master 2026-08-04
+        with:
+          toolchain: "1.88"
+      - name: Cache Cargo artifacts
+        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
+        with:
+          shared-key: msrv
+      - name: Check workspace at MSRV
+        run: cargo check --workspace --all-targets --all-features --locked
+
+  package:
+    name: Published crate package
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Install stable Rust
+        uses: dtolnay/rust-toolchain@2c7215f132e9ebf062739d9130488b56d53c060c # master 2026-08-04
+        with:
+          toolchain: stable
+      - name: Package publishable crate
+        run: cargo package -p stabbur_client --locked
+
+  supply-chain:
+    name: Supply chain
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Check advisories, licenses, bans, and sources
+        uses: EmbarkStudios/cargo-deny-action@v2
+        with:
+          command: check
+          rust-version: "1.88"
+
+  ci-gate:
+    name: CI gate
+    if: always()
+    needs:
+      - quality
+      - test
+      - features
+      - msrv
+      - package
+      - supply-chain
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Require all validation jobs to pass
+        env:
+          JOB_RESULTS: ${{ toJSON(needs) }}
+        run: jq --exit-status 'all(.[]; .result == "success")' <<< "$JOB_RESULTS"

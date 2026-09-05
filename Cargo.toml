@@ -1,0 +1,70 @@
+[workspace]
+members = ["stabbur_reconcile", "e2e_client"]
+resolver = "3"
+
+[package]
+name = "stabbur_client"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+license = "Apache-2.0"
+description = "Supported Rust client for the Stabbur artifact control plane"
+repository = "https://github.com/stabbur-dev/stabbur-client-rust"
+documentation = "https://docs.rs/stabbur_client"
+readme = "README.md"
+keywords = ["stabbur", "artifacts", "api", "client"]
+categories = ["api-bindings"]
+exclude = [".github/", "e2e_client/", "openapi/", "scripts/", "stabbur_reconcile/"]
+
+[package.metadata.stabbur]
+server-version = "0.1.0"
+server-image = "pending-server-release"
+
+[features]
+default = ["async"]
+async = [
+    "dep:bytes",
+    "dep:futures-core",
+    "dep:futures-util",
+    "reqwest/json",
+    "reqwest/rustls-tls",
+    "reqwest/stream",
+    "dep:tokio",
+]
+blocking = ["reqwest/blocking", "reqwest/json", "reqwest/rustls-tls"]
+
+[dependencies]
+bytes = { version = "1.10", optional = true }
+chrono = { version = "0.4", features = ["serde"] }
+futures-core = { version = "0.3", optional = true }
+futures-util = { version = "0.3", optional = true }
+reqwest = { version = "0.12", default-features = false }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "2.0"
+tokio = { version = "1.47", features = ["time"], optional = true }
+url = "2.5"
+uuid = { version = "1.18", features = ["serde"] }
+
+[dev-dependencies]
+tokio = { version = "1.47", features = ["macros", "rt-multi-thread"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+module_name_repetitions = "allow"
+must_use_candidate = "allow"
+missing_errors_doc = "allow"
+doc_markdown = "allow"
+
+[lints]
+workspace = true
+
+[profile.release]
+codegen-units = 1
+lto = "fat"
+strip = "symbols"
