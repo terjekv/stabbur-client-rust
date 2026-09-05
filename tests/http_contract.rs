@@ -68,6 +68,18 @@ fn mock_oversized_response() -> (String, thread::JoinHandle<()>) {
     let address = listener.local_addr().unwrap();
     let task = thread::spawn(move || {
         let (mut stream, _) = listener.accept().unwrap();
+        // Consume the request before closing so Linux does not reset the socket
+        // while the client is reading the response headers.
+        stream
+            .set_read_timeout(Some(std::time::Duration::from_secs(2)))
+            .unwrap();
+        let mut request = Vec::new();
+        let mut buffer = [0_u8; 4096];
+        while !complete_request(&request) {
+            let count = stream.read(&mut buffer).unwrap();
+            assert_ne!(count, 0, "client closed before sending complete request");
+            request.extend_from_slice(&buffer[..count]);
+        }
         let response = "HTTP/1.1 200 OK\r\ncontent-type: application/json\r\ncontent-length: 8388609\r\nconnection: close\r\n\r\n";
         stream.write_all(response.as_bytes()).unwrap();
     });

@@ -49,7 +49,9 @@ jobs:
         uses: DavidAnson/markdownlint-cli2-action@21c1be1b93ad9ed58fa840aacc3f279cde2a72ff # v24
         with:
           config: .markdownlint.json
-          globs: "**/*.md"
+          globs: |
+            **/*.md
+            #target/**
 
   test:
     name: Unit, behavior, and consumer tests

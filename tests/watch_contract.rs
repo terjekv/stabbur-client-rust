@@ -30,6 +30,8 @@ fn fixture(bodies: Vec<String>, stall: Duration) -> (String, thread::JoinHandle<
                     Err(error) => panic!("{error}"),
                 }
             };
+            // Accepted sockets inherit nonblocking mode on some platforms.
+            stream.set_nonblocking(false).unwrap();
             stream
                 .set_read_timeout(Some(Duration::from_secs(2)))
                 .unwrap();
