@@ -1,5 +1,16 @@
 # Server compatibility
 
+Client 0.0.1 targets Stabbur server 0.0.1 and the complete pinned 75-operation public contract.
+The release requires fresh immutable image acceptance for this exact contract and source tree.
+
+| Client | Server target | Image                    | Status                      |
+| ------ | ------------- | ------------------------ | --------------------------- |
+| 0.0.1  | 0.0.1         | `pending-server-release` | Awaiting release acceptance |
+
+The earlier development-image evidence below is historical and does not establish 0.0.1 compatibility.
+
+## Previous development-image acceptance
+
 The client, CLI, and server are independently versioned. Client 0.1.0 targets the Stabbur 0.1
 API shape pinned in this repository. Compatibility evidence identifies exact source commits
 and an immutable image digest; it does not declare a crates.io or tagged source release.

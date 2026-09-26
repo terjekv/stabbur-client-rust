@@ -16,6 +16,8 @@
 //! # Ok::<(), stabbur_client::ApiError>(())
 //! ```
 
+mod catalog_import;
+pub use catalog_import::{RecipeImportSelection, prepare_recipe_import};
 mod endpoints;
 mod events;
 pub use events::{RunCompletion, RunEvent, RunEventDecoder, TerminalRunState};
@@ -31,7 +33,7 @@ pub mod client;
 pub mod resources;
 
 /// Stabbur server release targeted by this client release.
-pub const TARGET_SERVER_VERSION: &str = "0.1.0";
+pub const TARGET_SERVER_VERSION: &str = "0.0.1";
 
 pub use catalog::{
     CATALOG_SCHEMA_VERSION, CatalogAction, CatalogManifest, CatalogPlan, CatalogRecipe,

@@ -1,8 +1,19 @@
 # Changelog
 
-## [Unreleased]
+## [0.0.1] - 2026-09-26
+
+- Target the first coordinated release as 0.0.1.
+- Update rustls to 0.23.45 to address RUSTSEC-2026-0285 without advisory exceptions.
+
+### Changed
+
+- `RecipeCatalogEntry` gains optional `import_sources`. Existing Rust struct literals must set
+  it to `None` when unknown. Older JSON snapshots continue to deserialize; refresh their worker
+  discovery before using the new import helper.
 
 ### Added
+
+- Add shared `prepare_recipe_import` validation for discovered source closures, producing pinned recipes and disabled manual targets.
 
 - Record verified Linux amd64 server-image compatibility and exact hosted acceptance evidence.
 
@@ -28,11 +39,11 @@
 - Make job ownership subject-neutral: build `run_id` and recipe-catalog scan identity are optional,
   mutually exclusive associations.
 
-## [0.1.0] - 2026-08-26
+## Initial development - 2026-08-26
 
 ### Added
 
-- Complete typed coverage for the original 57 Stabbur 0.1 public operations.
+- Complete typed coverage for the original 57 Stabbur 0.0.1 public operations.
 - Async and blocking typestate clients with compile-time surface parity.
 - Typed UUIDv7 identities, strict SHA-256 digests, cursor pages, lifecycle/catalog models, and
   redacted one-time credential types.

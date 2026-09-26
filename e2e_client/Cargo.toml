@@ -9,7 +9,7 @@ publish = false
 bytes = "1.10"
 futures-util = "0.3"
 serde_json = "1.0"
-stabbur_client = { path = "..", version = "=0.1.0", default-features = false, features = ["async"] }
+stabbur_client = { path = "..", version = "=0.0.1", default-features = false, features = ["async"] }
 tokio = { version = "1.47", features = ["macros", "rt-multi-thread"] }
 
 [lints]

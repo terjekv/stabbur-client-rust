@@ -1,6 +1,6 @@
 # Stabbur Rust client
 
-`stabbur_client` is the supported Rust API for Stabbur 0.1. It is independently versioned from
+`stabbur_client` is the supported Rust API for Stabbur 0.0.1. It is independently versioned from
 the server, uses typestate to separate unauthenticated and authenticated operations, and exposes
 equivalent asynchronous and blocking resource handles. The asynchronous client is enabled by
 default; synchronous applications select the `blocking` feature.
@@ -41,7 +41,7 @@ let client = Client::from_url("https://stabbur.example.net")?
 `SecretToken`, `Credentials`, created API tokens, and worker credentials redact their secret
 material from `Debug` and errors. Do not pass passwords or bearer tokens as process arguments.
 
-## v0.1 resource surface
+## v0.0.1 resource surface
 
 The pinned contract contains 75 public operations. Reviewed specifications reconcile every
 operation to a client implementation at build time.
@@ -95,7 +95,7 @@ idempotency controls, caps JSON requests at 2 MiB, and caps responses at 8 MiB. 
 
 ## Contract maintenance
 
-- `openapi/openapi.json` is the complete server 0.1 document.
+- `openapi/openapi.json` is the complete server 0.0.1 document.
 - `openapi/operations.json` is the normalized operation/security/content snapshot.
 - `stabbur_reconcile/specs/operations.json` is the reviewed coverage specification.
 - `src/resources/generated.rs` is committed generated source.
@@ -124,3 +124,10 @@ software status, release withdrawal, worker draining, and bounded reconnecting r
 See the server's [operator workflow guide](https://github.com/terjekv/stabbur/blob/main/docs/operator-workflows.md) and the independent
 [management console](https://github.com/terjekv/stabbur-frontend). Schema 1 catalogs remain accepted without targets.
 Local cross-repository integration does not replace immutable released-image acceptance.
+
+`prepare_recipe_import(&snapshot.manifest, &selections)` prepares a `ValidatedCatalogManifest`
+from discovered recipes with complete source pins. `RecipeImportSelection` requires explicit
+software names, artifact architecture and output variables. The resulting manual targets are
+disabled; use the existing catalog plan and reviewed sync APIs to apply them. Discovery errors,
+missing source closures, unpinned revisions and invalid output choices are rejected. The helper
+is transport-independent and available to both async and blocking clients.

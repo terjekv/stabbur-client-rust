@@ -547,6 +547,9 @@ pub struct RecipeCatalogSource {
 /// One normalized recipe observed in a catalog snapshot.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RecipeCatalogEntry {
+    /// Complete exact source closure, absent when discovery could not prove reproducibility.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub import_sources: Option<Vec<RecipeCatalogSource>>,
     /// Builder-owned stable identifier or entrypoint.
     pub identifier: String,
     /// Stable builder adapter selector.
