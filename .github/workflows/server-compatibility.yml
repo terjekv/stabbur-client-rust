@@ -7,7 +7,6 @@ on:
         description: Immutable stabbur-server image including @sha256 digest
         required: true
         type: string
-        default: ghcr.io/terjekv/stabbur-server@sha256:19a0c843a1622173f8efd3012ddd223a93c8f487a6e5c003b3de2f3387d7f723
 
 permissions:
   contents: read

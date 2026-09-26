@@ -3,6 +3,7 @@
 ## [0.0.1] - 2026-09-26
 
 - Target the first coordinated release as 0.0.1.
+- Gate immutable GitHub source/package releases on exact main CI and published server-image evidence.
 - Update rustls to 0.23.45 to address RUSTSEC-2026-0285 without advisory exceptions.
 
 ### Changed

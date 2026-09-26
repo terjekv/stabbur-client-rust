@@ -17,7 +17,7 @@ permissions:
 env:
   CARGO_TERM_COLOR: always
   STABBUR_TARGET_SERVER_VERSION: 0.0.1
-  STABBUR_TARGET_SERVER_IMAGE: pending-server-release
+  STABBUR_TARGET_SERVER_IMAGE: ghcr.io/terjekv/stabbur-server@sha256:41aba0e2051de7d74df09a6e57487a4e1755706d587aca54603167953fd0748d
 
 jobs:
   quality:
@@ -43,6 +43,8 @@ jobs:
         run: cargo doc --workspace --all-features --no-deps --locked
         env:
           RUSTDOCFLAGS: -D warnings
+      - name: Validate release evidence guards
+        run: python3 scripts/test-release.py
       - name: Validate pinned OpenAPI contract
         run: python3 scripts/openapi-contract.py validate
       - name: Lint Markdown

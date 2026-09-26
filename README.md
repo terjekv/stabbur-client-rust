@@ -5,6 +5,17 @@ the server, uses typestate to separate unauthenticated and authenticated operati
 equivalent asynchronous and blocking resource handles. The asynchronous client is enabled by
 default; synchronous applications select the `blocking` feature.
 
+## Installation
+
+Use the immutable [0.0.1 source release](https://github.com/terjekv/stabbur-client-rust/releases/tag/v0.0.1):
+
+```toml
+stabbur_client = { git = "https://github.com/terjekv/stabbur-client-rust", tag = "v0.0.1", version = "=0.0.1" }
+```
+
+The release also includes a verified `.crate` package. This release is distributed through GitHub;
+it is not published to crates.io.
+
 ## Quick start
 
 ```rust,no_run
@@ -119,7 +130,7 @@ exact source revisions and hosted acceptance evidence.
 
 ## Coordinated operator workflows
 
-The current unreleased contract includes catalog schema 2, exact target/revision reconciliation,
+The 0.0.1 contract includes catalog schema 2, exact target/revision reconciliation,
 software status, release withdrawal, worker draining, and bounded reconnecting run watches.
 See the server's [operator workflow guide](https://github.com/terjekv/stabbur/blob/main/docs/operator-workflows.md) and the independent
 [management console](https://github.com/terjekv/stabbur-frontend). Schema 1 catalogs remain accepted without targets.

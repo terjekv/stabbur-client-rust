@@ -18,7 +18,7 @@ exclude = [".github/", "e2e_client/", "openapi/", "scripts/", "stabbur_reconcile
 
 [package.metadata.stabbur]
 server-version = "0.0.1"
-server-image = "pending-server-release"
+server-image = "ghcr.io/terjekv/stabbur-server@sha256:41aba0e2051de7d74df09a6e57487a4e1755706d587aca54603167953fd0748d"
 
 [features]
 default = ["async"]

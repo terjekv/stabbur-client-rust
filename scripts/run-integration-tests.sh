@@ -10,7 +10,8 @@ fi
 container="stabbur-client-e2e-${RANDOM}"
 request_file="$(mktemp)"
 response_file="$(mktemp)"
-trap 'docker rm --force "$container" >/dev/null 2>&1 || true; rm -f "$request_file" "$response_file"' EXIT
+contract_file="$(mktemp)"
+trap 'docker rm --force "$container" >/dev/null 2>&1 || true; rm -f "$request_file" "$response_file" "$contract_file"' EXIT
 
 docker run --detach --name "$container" --publish 127.0.0.1::8080 "$image" >/dev/null
 port="$(docker port "$container" 8080/tcp | sed 's/.*://')"
@@ -23,6 +24,16 @@ for _ in $(seq 1 30); do
   sleep 1
 done
 curl --fail --silent "${server_url}/healthz" >/dev/null
+
+curl --fail --silent "${server_url}/api/v1/openapi.json" >"$contract_file"
+python3 - "$contract_file" <<'PYCONTRACT'
+import json, sys
+from pathlib import Path
+actual = json.loads(Path(sys.argv[1]).read_text())
+expected = json.loads(Path('openapi/openapi.json').read_text())
+if actual != expected:
+    raise SystemExit('The immutable server image differs from the pinned public contract')
+PYCONTRACT
 
 bootstrap_secret="$(docker exec "$container" sh -c 'cat /var/lib/stabbur/bootstrap.secret')"
 password="integration-only-password-42"
