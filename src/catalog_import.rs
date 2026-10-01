@@ -63,13 +63,18 @@ pub fn prepare_recipe_import(
         if matches.next().is_some()
             || entry.builder != "autopkg"
             || snapshot.diagnostics.iter().any(|diagnostic| {
-                diagnostic.severity == "error"
+                (diagnostic.severity == "error" || diagnostic.code == "parent_trust_required")
                     && (diagnostic.identifier.is_none()
                         || diagnostic.identifier.as_deref() == Some(&entry.identifier))
             })
         {
             return Err(invalid(
-                "resolve the discovery errors before importing this recipe",
+                "resolve discovery errors and parent trust requirements before importing this recipe",
+            ));
+        }
+        if !artifact_workflow(entry) {
+            return Err(invalid(
+                "refresh discovery and choose an artifact recipe; installation, publication and unknown-purpose recipes require a different workflow",
             ));
         }
         let pins = entry.import_sources.as_ref().filter(|sources| !sources.is_empty() && sources.len() <= 16).ok_or_else(|| invalid("this snapshot has no complete pinned source closure; refresh discovery or supply a reviewed catalog manifest"))?;
@@ -131,6 +136,15 @@ pub fn prepare_recipe_import(
     ValidatedCatalogManifest::new(desired)
 }
 
+fn artifact_workflow(entry: &crate::RecipeCatalogEntry) -> bool {
+    entry.guidance.as_ref().is_some_and(|guidance| {
+        matches!(
+            guidance.purpose,
+            crate::RecipePurpose::FetchArtifact | crate::RecipePurpose::BuildArtifact
+        )
+    })
+}
+
 fn output_pointer(variable: &str) -> Result<String, ApiError> {
     if variable.is_empty()
         || variable.len() > 128
@@ -156,7 +170,7 @@ fn invalid(reason: &'static str) -> ApiError {
 mod tests {
     use super::*;
     fn snapshot() -> RecipeCatalogManifest {
-        serde_json::from_value(serde_json::json!({"schema_version":1,"producer":"autopkg","source":{"locator":"stabbur-worker:fixture:autopkg","revision":"fixture"},"recipes":[{"identifier":"example.download.App","builder":"autopkg","parents":[],"required_capabilities":["builder.autopkg","os.macos"],"import_sources":[{"locator":"https://example.test/recipes.git","revision":"a".repeat(40)}]}],"diagnostics":[]})).unwrap()
+        serde_json::from_value(serde_json::json!({"schema_version":1,"producer":"autopkg","source":{"locator":"stabbur-worker:fixture:autopkg","revision":"fixture"},"recipes":[{"identifier":"example.download.App","guidance":{"name":"App","purpose":"fetch_artifact"},"builder":"autopkg","parents":[],"required_capabilities":["builder.autopkg","os.macos"],"import_sources":[{"locator":"https://example.test/recipes.git","revision":"a".repeat(40)}]}],"diagnostics":[]})).unwrap()
     }
     fn selection() -> RecipeImportSelection {
         RecipeImportSelection {
@@ -205,5 +219,28 @@ mod tests {
         let mut invalid = selection();
         invalid.architecture = "guess".into();
         assert!(prepare_recipe_import(&snapshot(), &[invalid]).is_err());
+    }
+    #[test]
+    fn guided_import_rejects_side_effects_legacy_snapshots_and_missing_trust() {
+        for purpose in [
+            crate::RecipePurpose::Install,
+            crate::RecipePurpose::Publish,
+            crate::RecipePurpose::Unknown,
+        ] {
+            let mut source = snapshot();
+            source.recipes[0].guidance.as_mut().unwrap().purpose = purpose;
+            assert!(prepare_recipe_import(&source, &[selection()]).is_err());
+        }
+        let mut source = snapshot();
+        source.recipes[0].guidance = None;
+        assert!(prepare_recipe_import(&source, &[selection()]).is_err());
+        source = snapshot();
+        source.diagnostics.push(crate::RecipeCatalogDiagnostic {
+            identifier: Some(selection().identifier),
+            code: "parent_trust_required".into(),
+            severity: "warning".into(),
+            detail: "Review the parent chain.".into(),
+        });
+        assert!(prepare_recipe_import(&source, &[selection()]).is_err());
     }
 }

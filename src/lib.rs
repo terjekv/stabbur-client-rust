@@ -53,13 +53,13 @@ pub use types::{
     BuildTargetUpdate, Channel, CreatedApiToken, Credentials, CursorPage, Health,
     InstallationMetadata, Job, JobId, JobSummary, NewAutoPkgRevision, NewRecipeRevision,
     PinnedSource, Principal, PrincipalAdmin, PrincipalId, Recipe, RecipeCatalogDiagnostic,
-    RecipeCatalogEntry, RecipeCatalogLookup, RecipeCatalogManifest, RecipeCatalogMatch,
-    RecipeCatalogScan, RecipeCatalogScanFailure, RecipeCatalogScanId, RecipeCatalogSnapshot,
-    RecipeCatalogSnapshotId, RecipeCatalogSnapshotSummary, RecipeCatalogSource, RecipeId,
-    RecipeRevision, RecipeRevisionId, Release, ReleaseId, Resolution, Role,
-    RotatedWorkerCredential, Run, RunId, RunLog, RunSummary, SecretToken, Sha256Digest, Software,
-    SoftwareId, Store, StoreId, StoreTest, Variant, VariantArtifact, VariantId, Worker,
-    WorkerCredential, WorkerId,
+    RecipeCatalogEntry, RecipeCatalogGuidance, RecipeCatalogLookup, RecipeCatalogManifest,
+    RecipeCatalogMatch, RecipeCatalogScan, RecipeCatalogScanFailure, RecipeCatalogScanId,
+    RecipeCatalogSnapshot, RecipeCatalogSnapshotId, RecipeCatalogSnapshotSummary,
+    RecipeCatalogSource, RecipeId, RecipePurpose, RecipeRevision, RecipeRevisionId, Release,
+    ReleaseId, Resolution, Role, RotatedWorkerCredential, Run, RunId, RunLog, RunSummary,
+    SecretToken, Sha256Digest, Software, SoftwareId, Store, StoreId, StoreTest, Variant,
+    VariantArtifact, VariantId, Worker, WorkerCredential, WorkerId,
 };
 
 pub use types::{

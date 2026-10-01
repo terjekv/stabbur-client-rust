@@ -547,6 +547,9 @@ pub struct RecipeCatalogSource {
 /// One normalized recipe observed in a catalog snapshot.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RecipeCatalogEntry {
+    /// Optional display hints from updated workers; these do not authorize execution.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub guidance: Option<RecipeCatalogGuidance>,
     /// Complete exact source closure, absent when discovery could not prove reproducibility.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub import_sources: Option<Vec<RecipeCatalogSource>>,
@@ -558,6 +561,32 @@ pub struct RecipeCatalogEntry {
     pub parents: Vec<String>,
     /// Capabilities required to execute this recipe.
     pub required_capabilities: Vec<String>,
+}
+
+/// Observed display metadata; a raw transport value, not verified recipe policy.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct RecipeCatalogGuidance {
+    /// Name derived from a recipe filename.
+    pub name: String,
+    /// Observed processing intent, independent of filename suffix.
+    pub purpose: RecipePurpose,
+}
+
+/// Observed processing intent, never an execution safety guarantee.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum RecipePurpose {
+    /// Fetch a vendor artifact.
+    FetchArtifact,
+    /// Build or copy a package.
+    BuildArtifact,
+    /// Install onto the worker.
+    Install,
+    /// Publish to another system.
+    Publish,
+    /// Unknown or future purpose requiring review.
+    #[serde(other)]
+    Unknown,
 }
 
 /// One safe catalog validation diagnostic.

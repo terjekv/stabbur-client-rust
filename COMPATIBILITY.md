@@ -1,5 +1,13 @@
 # Server compatibility
 
+## Unreleased recipe onboarding
+
+The development contract adds optional observed catalog guidance. Guided imports require a server
+and worker with that metadata; older inventories must be refreshed after upgrading. Existing
+read/list operations continue to accept older snapshots. The release evidence below records the
+published version and does not establish compatibility for these unpublished changes.
+
+
 Client 0.0.1 targets released Stabbur server 0.0.1 and the complete pinned 75-operation contract.
 
 | Client | Server | Platform    | Evidence                                                                     | Status         |

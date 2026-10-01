@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Add optional observed recipe guidance to catalog entries and the pinned API contract.
+- Guided imports require refreshed artifact-purpose metadata and reject missing parent trust.
+  Legacy snapshots remain readable; rescan before guided import.
+- Breaking for Rust struct literals: initialize the new `RecipeCatalogEntry.guidance` field
+  to `None` when unknown. JSON from older servers remains readable.
+
 ## [0.0.1] - 2026-09-26
 
 - Target the first coordinated release as 0.0.1.
