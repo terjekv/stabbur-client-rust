@@ -54,7 +54,7 @@ material from `Debug` and errors. Do not pass passwords or bearer tokens as proc
 
 ## v0.0.1 resource surface
 
-The pinned contract contains 75 public operations. Reviewed specifications reconcile every
+The development contract contains 86 public operations, including saved batch exports. The released 0.0.1 image supports the earlier 75-operation contract. Reviewed specifications reconcile every
 operation to a client implementation at build time.
 
 | Handle            | Operations                                                                 |
@@ -142,3 +142,20 @@ software names, artifact architecture and output variables. The resulting manual
 disabled; use the existing catalog plan and reviewed sync APIs to apply them. Discovery errors,
 missing source closures, unpinned revisions and invalid output choices are rejected. The helper
 is transport-independent and available to both async and blocking clients.
+
+## Saved batch exports (development server)
+
+`client.exports()` provides create/update, plan/apply, immutable snapshots and history, and
+export-only reader credentials in both transports. Save an `ExportDefinition`, inspect a returned
+`ExportPlan`, and pass that exact plan to `apply`; stale plans are rejected by the server.
+`MaterializableExport` validates snapshot eligibility and safe installer metadata before local
+materialization. Device reads use the unauthenticated client's dedicated `export_repository`
+(async) or `export_repository_to` (blocking) method with a separate redacted reader token.
+
+### Software library (development server)
+
+`client.software().library(&LibraryQuery::new("Firefox", LibraryView::Review,
+LibrarySort::Name)?, cursor, 50)` searches before pagination and returns aggregate status rows.
+The blocking transport has the same API. Reuse cursors only with the same query. `Attention`
+selects current failed checks without outstanding replacement work, unavailable workers, and
+available candidates. Versions are opaque; ordering uses names or creation identities.

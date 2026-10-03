@@ -53,13 +53,13 @@ pub use types::{
     BuildTargetUpdate, Channel, CreatedApiToken, Credentials, CursorPage, Health,
     InstallationMetadata, Job, JobId, JobSummary, NewAutoPkgRevision, NewRecipeRevision,
     PinnedSource, Principal, PrincipalAdmin, PrincipalId, Recipe, RecipeCatalogDiagnostic,
-    RecipeCatalogEntry, RecipeCatalogLookup, RecipeCatalogManifest, RecipeCatalogMatch,
-    RecipeCatalogScan, RecipeCatalogScanFailure, RecipeCatalogScanId, RecipeCatalogSnapshot,
-    RecipeCatalogSnapshotId, RecipeCatalogSnapshotSummary, RecipeCatalogSource, RecipeId,
-    RecipeRevision, RecipeRevisionId, Release, ReleaseId, Resolution, Role,
-    RotatedWorkerCredential, Run, RunId, RunLog, RunSummary, SecretToken, Sha256Digest, Software,
-    SoftwareId, Store, StoreId, StoreTest, Variant, VariantArtifact, VariantId, Worker,
-    WorkerCredential, WorkerId,
+    RecipeCatalogEntry, RecipeCatalogGuidance, RecipeCatalogLookup, RecipeCatalogManifest,
+    RecipeCatalogMatch, RecipeCatalogScan, RecipeCatalogScanFailure, RecipeCatalogScanId,
+    RecipeCatalogSnapshot, RecipeCatalogSnapshotId, RecipeCatalogSnapshotSummary,
+    RecipeCatalogSource, RecipeId, RecipePurpose, RecipeRevision, RecipeRevisionId, Release,
+    ReleaseId, Resolution, Role, RotatedWorkerCredential, Run, RunId, RunLog, RunSummary,
+    SecretToken, Sha256Digest, Software, SoftwareId, Store, StoreId, StoreTest, Variant,
+    VariantArtifact, VariantId, Worker, WorkerCredential, WorkerId,
 };
 
 pub use types::{
@@ -69,3 +69,12 @@ pub use types::{
 pub use catalog::{CatalogTarget, PlannedRecipeRevision, ValidatedCatalogManifest};
 
 pub use catalog::{SourcePinChange, SourceUpdateProposal, ValidatedSourcePin};
+
+/// Saved batch exports and Munki destination models.
+pub mod exports;
+pub use types::ExportId;
+
+mod library;
+pub use library::{LibraryEntry, LibraryQuery, LibrarySort, LibraryView};
+
+pub use types::CapabilityQueue;

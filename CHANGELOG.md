@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased
+
+- Add validated `LibraryQuery`, `LibraryView`, `LibrarySort`, and paginated software library
+  summaries with async/blocking parity. Search and attention filters require the development server.
+- Add capability queue observations to operational status. Older JSON remains readable; Rust
+  struct literals must initialize `capability_queues` and `capability_queues_truncated`.
+
+- Add typed saved-export definitions, batch plans, immutable snapshots and scoped repository readers with async/blocking parity. New export methods require the coordinated development server; the released 0.0.1 image does not implement them.
+
+- Add optional observed recipe guidance to catalog entries and the pinned API contract.
+- Guided imports require refreshed artifact-purpose metadata and reject missing parent trust.
+  Legacy snapshots remain readable; rescan before guided import.
+- Breaking for Rust struct literals: initialize the new `RecipeCatalogEntry.guidance` field
+  to `None` when unknown. JSON from older servers remains readable.
+
 ## [0.0.1] - 2026-09-26
 
 - Target the first coordinated release as 0.0.1.

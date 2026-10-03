@@ -1,5 +1,12 @@
 # Server compatibility
 
+## Unreleased recipe onboarding
+
+The development contract adds optional observed catalog guidance. Guided imports require a server
+and worker with that metadata; older inventories must be refreshed after upgrading. Existing
+read/list operations continue to accept older snapshots. The release evidence below records the
+published version and does not establish compatibility for these unpublished changes.
+
 Client 0.0.1 targets released Stabbur server 0.0.1 and the complete pinned 75-operation contract.
 
 | Client | Server | Platform    | Evidence                                                                     | Status         |
@@ -53,7 +60,7 @@ The live consumer covers authentication, software, builder-neutral recipes and a
 deterministic target-triggered fake run/job, catalog scan request/cancellation,
 principal/token administration, worker provision/rotation/drain, streaming artifact ingestion
 and download, artifact HEAD and locations, stores, and audit. Mock tests additionally verify
-transport bounds, redaction, and async/blocking behavior. The pinned contract has 75 operations.
+transport bounds, redaction, and async/blocking behavior. The released contract has 75 operations; the development extension below has 86.
 
 The [macOS acceptance run](https://github.com/terjekv/stabbur/actions/runs/33988455119) separately proves source-built browser
 management, AutoPkg delivery, actual Munki installation/detection, backup restoration, crash
@@ -68,3 +75,10 @@ STABBUR_INTEGRATION_SERVER_IMAGE='ghcr.io/terjekv/stabbur-server@sha256:19a0c843
 
 For another server image, rerun the live suite before updating the manifest, workflow defaults,
 this matrix and the recorded evidence. Preserve the OpenAPI hash and exact tested source commits.
+
+## Unreleased saved-export extension
+
+The development branch pins an 86-operation document. Its 11 export operations require the
+matching development server. The released image and immutable 0.0.1 evidence above remain
+historical evidence for the 75-operation release; they do not claim export support. The coordinated
+workspace suite checks the development server, console and CLI at their exact source revisions.

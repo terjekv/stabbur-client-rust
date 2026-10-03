@@ -1,4 +1,7 @@
+#[cfg(any(feature = "async", feature = "blocking"))]
 mod catalog_ops;
+#[cfg(any(feature = "async", feature = "blocking"))]
+mod export_ops;
 use std::fmt;
 
 use crate::SecretToken;
@@ -322,6 +325,41 @@ mod parity {
 
     #[allow(dead_code, clippy::too_many_lines)]
     fn public_surface_compiles() {
+        let _ = r#async::ExportResource::list;
+        let _ = blocking::ExportResource::list;
+        let _ = r#async::ExportResource::get;
+        let _ = blocking::ExportResource::get;
+        let _ = r#async::ExportResource::create;
+        let _ = blocking::ExportResource::create;
+        let _ = r#async::ExportResource::update;
+        let _ = blocking::ExportResource::update;
+        let _ = r#async::ExportResource::plan;
+        let _ = blocking::ExportResource::plan;
+        let _ = r#async::ExportResource::apply;
+        let _ = blocking::ExportResource::apply;
+        let _ = r#async::ExportResource::snapshot;
+        let _ = blocking::ExportResource::snapshot;
+        let _ = r#async::ExportResource::history;
+        let _ = blocking::ExportResource::history;
+        let _ = r#async::ExportResource::issue_reader;
+        let _ = blocking::ExportResource::issue_reader;
+        let _ = r#async::ExportResource::revoke_readers;
+        let _ = blocking::ExportResource::revoke_readers;
+        let _ = r#async::ExportResource::repository_url;
+        let _ = blocking::ExportResource::repository_url;
+        let _ = r#async::Client::<Unauthenticated>::export_repository;
+        let _ = |client: &blocking::Client<Unauthenticated>,
+                 token: &crate::SecretToken,
+                 output: &mut Vec<u8>| {
+            client.export_repository_to(
+                "staff",
+                crate::exports::RepositoryKind::Catalogs,
+                "production",
+                token,
+                output,
+            )
+        };
+
         let _ = r#async::Client::<Unauthenticated>::from_url;
         let _ = blocking::Client::<Unauthenticated>::from_url;
         let _ = r#async::Client::<Unauthenticated>::health;
@@ -396,6 +434,8 @@ mod parity {
         let _ = blocking::CatalogResource::plan_validated;
         let _ = r#async::CatalogResource::sync_validated;
         let _ = blocking::CatalogResource::sync_validated;
+        let _ = r#async::SoftwareResource::library;
+        let _ = blocking::SoftwareResource::library;
         let _ = r#async::SoftwareResource::status;
         let _ = blocking::SoftwareResource::status;
         let _ = r#async::SoftwareResource::withdraw;

@@ -6,6 +6,7 @@ pub(crate) const ME: &str = "/api/v1/auth/me";
 pub(crate) const PASSWORD: &str = "/api/v1/auth/password";
 pub(crate) const PRINCIPALS: &str = "/api/v1/auth/principals";
 pub(crate) const ROLES: &str = "/api/v1/auth/roles";
+pub(crate) const SOFTWARE_LIBRARY: &str = "/api/v1/library/software";
 pub(crate) const SOFTWARE: &str = "/api/v1/software";
 pub(crate) const RECIPES: &str = "/api/v1/recipes";
 pub(crate) const RECIPE_CATALOGS: &str = "/api/v1/recipe-catalogs";
@@ -157,6 +158,29 @@ pub(crate) fn withdraw_release(identity: &str) -> String {
 }
 pub(crate) fn drain_worker(identity: &str) -> String {
     format!("{}/drain", worker(identity))
+}
+
+pub(crate) const EXPORTS: &str = "/api/v1/exports";
+pub(crate) fn export(identity: &str) -> String {
+    child(EXPORTS, identity)
+}
+pub(crate) fn export_action(identity: &str, action: &str) -> String {
+    nested(EXPORTS, identity, action)
+}
+pub(crate) fn export_snapshot(identity: &str, generation: u64) -> String {
+    format!("{}/snapshots/{generation}", export(identity))
+}
+pub(crate) fn export_repository(
+    identity: &str,
+    kind: crate::exports::RepositoryKind,
+    name: &str,
+) -> String {
+    format!(
+        "{}/repository/{}/{}",
+        export(identity),
+        kind.segment(),
+        encode_segment(name)
+    )
 }
 
 #[cfg(test)]

@@ -390,6 +390,165 @@
     },
     {
       "method": "GET",
+      "operation_id": "list_exports",
+      "path": "/api/v1/exports",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_export",
+      "path": "/api/v1/exports",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_export",
+      "path": "/api/v1/exports/{export}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "PUT",
+      "operation_id": "update_export",
+      "path": "/api/v1/exports/{export}",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "apply_export",
+      "path": "/api/v1/exports/{export}/apply",
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "list_export_history",
+      "path": "/api/v1/exports/{export}/history",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "plan_export",
+      "path": "/api/v1/exports/{export}/plan",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "create_export_reader",
+      "path": "/api/v1/exports/{export}/readers",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "operation_id": "revoke_export_readers",
+      "path": "/api/v1/exports/{export}/readers/revoke",
+      "request_content_types": [],
+      "response_content_types": [],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "export_repository",
+      "path": "/api/v1/exports/{export}/repository/{kind}/{name}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json",
+        "application/octet-stream"
+      ],
+      "security": [
+        {
+          "export_reader": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "get_export_snapshot",
+      "path": "/api/v1/exports/{export}/snapshots/{generation}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
       "operation_id": "list_jobs",
       "path": "/api/v1/jobs",
       "request_content_types": [],
@@ -406,6 +565,20 @@
       "method": "GET",
       "operation_id": "get_job",
       "path": "/api/v1/jobs/{job}",
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "security": [
+        {
+          "bearer_auth": []
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "operation_id": "software_library",
+      "path": "/api/v1/library/software",
       "request_content_types": [],
       "response_content_types": [
         "application/json"
@@ -1073,5 +1246,5 @@
     }
   ],
   "server_version": "0.0.1",
-  "source_sha256": "4a979bb27b5e4651320f87d7345995bd24868aa2a0cb9a072936f70dffda4901"
+  "source_sha256": "be75cdf3e7951468916951d39441bb007d9dcb420221c606879f9fb8d378b61b"
 }

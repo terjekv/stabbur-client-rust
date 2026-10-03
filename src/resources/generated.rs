@@ -9,6 +9,11 @@ pub struct Operation {
     pub path: &'static str,
 }
 
+/// `apply_export`.
+pub const APPLY_EXPORT: Operation = Operation {
+    method: "POST",
+    path: "/api/v1/exports/{export}/apply",
+};
 /// `bootstrap`.
 pub const BOOTSTRAP: Operation = Operation {
     method: "POST",
@@ -38,6 +43,16 @@ pub const CREATE_API_TOKEN: Operation = Operation {
 pub const CREATE_BUILD_TARGET: Operation = Operation {
     method: "POST",
     path: "/api/v1/build-targets",
+};
+/// `create_export`.
+pub const CREATE_EXPORT: Operation = Operation {
+    method: "POST",
+    path: "/api/v1/exports",
+};
+/// `create_export_reader`.
+pub const CREATE_EXPORT_READER: Operation = Operation {
+    method: "POST",
+    path: "/api/v1/exports/{export}/readers",
 };
 /// `create_principal`.
 pub const CREATE_PRINCIPAL: Operation = Operation {
@@ -84,6 +99,11 @@ pub const DRAIN_WORKER: Operation = Operation {
     method: "POST",
     path: "/api/v1/workers/{worker}/drain",
 };
+/// `export_repository`.
+pub const EXPORT_REPOSITORY: Operation = Operation {
+    method: "GET",
+    path: "/api/v1/exports/{export}/repository/{kind}/{name}",
+};
 /// `get_artifact`.
 pub const GET_ARTIFACT: Operation = Operation {
     method: "GET",
@@ -98,6 +118,16 @@ pub const GET_BUILD_TARGET: Operation = Operation {
 pub const GET_CHANNEL: Operation = Operation {
     method: "GET",
     path: "/api/v1/software/{software}/channels/{channel}",
+};
+/// `get_export`.
+pub const GET_EXPORT: Operation = Operation {
+    method: "GET",
+    path: "/api/v1/exports/{export}",
+};
+/// `get_export_snapshot`.
+pub const GET_EXPORT_SNAPSHOT: Operation = Operation {
+    method: "GET",
+    path: "/api/v1/exports/{export}/snapshots/{generation}",
 };
 /// `get_job`.
 pub const GET_JOB: Operation = Operation {
@@ -188,6 +218,16 @@ pub const LIST_BUILD_TARGET_RUNS: Operation = Operation {
 pub const LIST_CHANNELS: Operation = Operation {
     method: "GET",
     path: "/api/v1/software/{software}/channels",
+};
+/// `list_exports`.
+pub const LIST_EXPORTS: Operation = Operation {
+    method: "GET",
+    path: "/api/v1/exports",
+};
+/// `list_export_history`.
+pub const LIST_EXPORT_HISTORY: Operation = Operation {
+    method: "GET",
+    path: "/api/v1/exports/{export}/history",
 };
 /// `list_jobs`.
 pub const LIST_JOBS: Operation = Operation {
@@ -284,6 +324,11 @@ pub const OPERATIONAL_STATUS: Operation = Operation {
     method: "GET",
     path: "/api/v1/operations/status",
 };
+/// `plan_export`.
+pub const PLAN_EXPORT: Operation = Operation {
+    method: "POST",
+    path: "/api/v1/exports/{export}/plan",
+};
 /// `promote_channel`.
 pub const PROMOTE_CHANNEL: Operation = Operation {
     method: "PUT",
@@ -324,6 +369,11 @@ pub const REVOKE_API_TOKEN: Operation = Operation {
     method: "DELETE",
     path: "/api/v1/auth/tokens/{token}",
 };
+/// `revoke_export_readers`.
+pub const REVOKE_EXPORT_READERS: Operation = Operation {
+    method: "POST",
+    path: "/api/v1/exports/{export}/readers/revoke",
+};
 /// `revoke_principal_sessions`.
 pub const REVOKE_PRINCIPAL_SESSIONS: Operation = Operation {
     method: "POST",
@@ -333,6 +383,11 @@ pub const REVOKE_PRINCIPAL_SESSIONS: Operation = Operation {
 pub const ROTATE_WORKER_TOKEN: Operation = Operation {
     method: "POST",
     path: "/api/v1/workers/{worker}/rotate-token",
+};
+/// `software_library`.
+pub const SOFTWARE_LIBRARY: Operation = Operation {
+    method: "GET",
+    path: "/api/v1/library/software",
 };
 /// `software_status`.
 pub const SOFTWARE_STATUS: Operation = Operation {
@@ -358,6 +413,11 @@ pub const TRIGGER_BUILD_TARGET: Operation = Operation {
 pub const UPDATE_BUILD_TARGET: Operation = Operation {
     method: "PATCH",
     path: "/api/v1/build-targets/{target}",
+};
+/// `update_export`.
+pub const UPDATE_EXPORT: Operation = Operation {
+    method: "PUT",
+    path: "/api/v1/exports/{export}",
 };
 /// `update_principal`.
 pub const UPDATE_PRINCIPAL: Operation = Operation {
