@@ -152,7 +152,6 @@ export-only reader credentials in both transports. Save an `ExportDefinition`, i
 materialization. Device reads use the unauthenticated client's dedicated `export_repository`
 (async) or `export_repository_to` (blocking) method with a separate redacted reader token.
 
-
 ### Software library (development server)
 
 `client.software().library(&LibraryQuery::new("Firefox", LibraryView::Review,
