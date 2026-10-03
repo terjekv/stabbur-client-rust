@@ -188,6 +188,7 @@ macro_rules! uuid_v7_id {
     };
 }
 
+uuid_v7_id!(ExportId, "export");
 uuid_v7_id!(SoftwareId, "software");
 uuid_v7_id!(PrincipalId, "principal");
 uuid_v7_id!(RecipeId, "recipe");

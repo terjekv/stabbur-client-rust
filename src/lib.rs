@@ -69,3 +69,7 @@ pub use types::{
 pub use catalog::{CatalogTarget, PlannedRecipeRevision, ValidatedCatalogManifest};
 
 pub use catalog::{SourcePinChange, SourceUpdateProposal, ValidatedSourcePin};
+
+/// Saved batch exports and Munki destination models.
+pub mod exports;
+pub use types::ExportId;

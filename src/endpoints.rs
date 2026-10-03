@@ -159,6 +159,29 @@ pub(crate) fn drain_worker(identity: &str) -> String {
     format!("{}/drain", worker(identity))
 }
 
+pub(crate) const EXPORTS: &str = "/api/v1/exports";
+pub(crate) fn export(identity: &str) -> String {
+    child(EXPORTS, identity)
+}
+pub(crate) fn export_action(identity: &str, action: &str) -> String {
+    nested(EXPORTS, identity, action)
+}
+pub(crate) fn export_snapshot(identity: &str, generation: u64) -> String {
+    format!("{}/snapshots/{generation}", export(identity))
+}
+pub(crate) fn export_repository(
+    identity: &str,
+    kind: crate::exports::RepositoryKind,
+    name: &str,
+) -> String {
+    format!(
+        "{}/repository/{}/{}",
+        export(identity),
+        kind.segment(),
+        encode_segment(name)
+    )
+}
+
 #[cfg(test)]
 mod tests {
     use super::{channel, software};

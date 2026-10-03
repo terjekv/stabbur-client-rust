@@ -196,6 +196,13 @@ impl Client<Authenticated> {
             client: self.clone(),
         }
     }
+    /// Shared saved-export definitions, previews and atomic publication.
+    #[must_use]
+    pub fn exports(&self) -> ExportResource {
+        ExportResource {
+            client: self.clone(),
+        }
+    }
     /// Versioned catalog manifest planning and synchronization.
     #[must_use]
     pub fn catalog(&self) -> CatalogResource {
@@ -1783,5 +1790,61 @@ impl RecipeResource {
         decode(self.client.request(Method::POST, &endpoints::recipe_revisions(recipe))
             .json(&serde_json::json!({"builder": revision.builder, "definition": revision.definition, "required_capabilities": revision.required_capabilities, "expected_sequence": sequence}))
             .send().map_err(|_| ApiError::Transport)?)
+    }
+}
+
+/// Saved exports shared by all administrative clients.
+#[derive(Clone)]
+pub struct ExportResource {
+    client: Client<Authenticated>,
+}
+impl ExportResource {
+    super::export_ops::export_methods!(,);
+}
+impl Client<Unauthenticated> {
+    /// Streams one protected Munki repository resource into a caller-owned writer.
+    pub fn export_repository_to(
+        &self,
+        identity: &str,
+        kind: crate::exports::RepositoryKind,
+        name: &str,
+        token: &SecretToken,
+        writer: &mut impl Write,
+    ) -> Result<DownloadOutcome, ApiError> {
+        let response = self
+            .http
+            .get(
+                self.base_url
+                    .endpoint(&endpoints::export_repository(identity, kind, name)),
+            )
+            .basic_auth("stabbur", Some(token.expose_secret()))
+            .timeout(Duration::from_secs(3600))
+            .send()
+            .map_err(|_| ApiError::Transport)?;
+        if !response.status().is_success() {
+            return Err(decode_error(response));
+        }
+        let content_length = response.content_length();
+        let mut response = response;
+        let mut bytes_written = 0u64;
+        let mut buffer = vec![0u8; 65536].into_boxed_slice();
+        loop {
+            let n = response
+                .read(&mut buffer)
+                .map_err(|_| ApiError::Transport)?;
+            if n == 0 {
+                break;
+            }
+            writer
+                .write_all(&buffer[..n])
+                .map_err(|_| ApiError::DownloadOutput)?;
+            bytes_written += n as u64;
+        }
+        Ok(DownloadOutcome {
+            bytes_written,
+            content_length,
+            etag: None,
+            resumed: false,
+        })
     }
 }

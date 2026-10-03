@@ -347,3 +347,64 @@ fn declared_oversized_json_is_rejected_before_buffering() {
     assert!(matches!(error, stabbur_client::ApiError::ResponseTooLarge));
     server.join().unwrap();
 }
+
+#[cfg(feature = "async")]
+#[tokio::test]
+async fn export_plan_preserves_exact_selection_token_and_escapes_identity() {
+    let plan = serde_json::json!({"export":"01900000-0000-7000-8000-000000000001","definition_revision":3,"published_generation":1,"fingerprint":"a".repeat(64),"ready":true,"changes":[],"items":[]});
+    let (origin, task) = mock_once("200 OK", &plan.to_string());
+    let client = stabbur_client::Client::from_url(&origin)
+        .unwrap()
+        .authenticate(SecretToken::new("test-bearer").unwrap());
+    let result = client
+        .exports()
+        .plan("staff/../foreign?key=value")
+        .await
+        .unwrap();
+    assert_eq!(result.fingerprint.as_str(), "a".repeat(64));
+    let request = task.join().unwrap();
+    assert!(request.starts_with("POST /api/v1/exports/staff%2F..%2Fforeign%3Fkey%3Dvalue/plan "));
+}
+#[cfg(feature = "blocking")]
+#[test]
+fn export_apply_sends_the_reviewed_fingerprint_and_handles_stale_plan() {
+    let plan:stabbur_client::exports::ExportPlan=serde_json::from_value(serde_json::json!({"export":"01900000-0000-7000-8000-000000000001","definition_revision":3,"published_generation":1,"fingerprint":"b".repeat(64),"ready":true,"changes":[],"items":[]})).unwrap();
+    let (origin, task) = mock_once(
+        "409 Conflict",
+        r#"{"status":409,"code":"export_plan_changed","detail":"Review a fresh preview.","request_id":"test"}"#,
+    );
+    let client = stabbur_client::blocking::Client::from_url(&origin)
+        .unwrap()
+        .authenticate(SecretToken::new("test-bearer").unwrap());
+    assert!(
+        matches!(client.exports().apply(&plan),Err(stabbur_client::ApiError::Server(p)) if p.status==409)
+    );
+    let request = task.join().unwrap();
+    assert!(request.contains(&format!("\"fingerprint\":\"{}\"", "b".repeat(64))));
+    assert!(request.contains("\"reviewed\":true"));
+}
+#[cfg(feature = "async")]
+#[tokio::test]
+async fn repository_reader_is_redacted_and_only_used_as_scoped_basic_auth() {
+    use futures_util::StreamExt;
+    let reader: stabbur_client::exports::ExportReader =
+        serde_json::from_str(r#"{"token":"repository-test-secret"}"#).unwrap();
+    assert!(!format!("{reader:?}").contains("repository-test-secret"));
+    let (origin, task) = mock_once("200 OK", "bytes");
+    let client = stabbur_client::Client::from_url(&origin).unwrap();
+    let mut download = client
+        .export_repository(
+            "staff",
+            stabbur_client::exports::RepositoryKind::Catalogs,
+            "production",
+            &reader.token,
+        )
+        .await
+        .unwrap()
+        .into_stream();
+    assert_eq!(download.next().await.unwrap().unwrap().as_ref(), b"bytes");
+    let request = task.join().unwrap();
+    assert!(request.starts_with("GET /api/v1/exports/staff/repository/catalogs/production "));
+    assert!(request.to_lowercase().contains("authorization: basic "));
+    assert!(!request.to_lowercase().contains("bearer"));
+}
