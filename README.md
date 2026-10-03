@@ -151,3 +151,12 @@ export-only reader credentials in both transports. Save an `ExportDefinition`, i
 `MaterializableExport` validates snapshot eligibility and safe installer metadata before local
 materialization. Device reads use the unauthenticated client's dedicated `export_repository`
 (async) or `export_repository_to` (blocking) method with a separate redacted reader token.
+
+
+### Software library (development server)
+
+`client.software().library(&LibraryQuery::new("Firefox", LibraryView::Review,
+LibrarySort::Name)?, cursor, 50)` searches before pagination and returns aggregate status rows.
+The blocking transport has the same API. Reuse cursors only with the same query. `Attention`
+selects current failed checks without outstanding replacement work, unavailable workers, and
+available candidates. Versions are opaque; ordering uses names or creation identities.

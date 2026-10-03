@@ -190,6 +190,83 @@
       "status": "implemented"
     },
     {
+      "constant": "LIST_EXPORTS",
+      "method": "GET",
+      "operation_id": "list_exports",
+      "path": "/api/v1/exports",
+      "status": "implemented"
+    },
+    {
+      "constant": "CREATE_EXPORT",
+      "method": "POST",
+      "operation_id": "create_export",
+      "path": "/api/v1/exports",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_EXPORT",
+      "method": "GET",
+      "operation_id": "get_export",
+      "path": "/api/v1/exports/{export}",
+      "status": "implemented"
+    },
+    {
+      "constant": "UPDATE_EXPORT",
+      "method": "PUT",
+      "operation_id": "update_export",
+      "path": "/api/v1/exports/{export}",
+      "status": "implemented"
+    },
+    {
+      "constant": "APPLY_EXPORT",
+      "method": "POST",
+      "operation_id": "apply_export",
+      "path": "/api/v1/exports/{export}/apply",
+      "status": "implemented"
+    },
+    {
+      "constant": "LIST_EXPORT_HISTORY",
+      "method": "GET",
+      "operation_id": "list_export_history",
+      "path": "/api/v1/exports/{export}/history",
+      "status": "implemented"
+    },
+    {
+      "constant": "PLAN_EXPORT",
+      "method": "POST",
+      "operation_id": "plan_export",
+      "path": "/api/v1/exports/{export}/plan",
+      "status": "implemented"
+    },
+    {
+      "constant": "CREATE_EXPORT_READER",
+      "method": "POST",
+      "operation_id": "create_export_reader",
+      "path": "/api/v1/exports/{export}/readers",
+      "status": "implemented"
+    },
+    {
+      "constant": "REVOKE_EXPORT_READERS",
+      "method": "POST",
+      "operation_id": "revoke_export_readers",
+      "path": "/api/v1/exports/{export}/readers/revoke",
+      "status": "implemented"
+    },
+    {
+      "constant": "EXPORT_REPOSITORY",
+      "method": "GET",
+      "operation_id": "export_repository",
+      "path": "/api/v1/exports/{export}/repository/{kind}/{name}",
+      "status": "implemented"
+    },
+    {
+      "constant": "GET_EXPORT_SNAPSHOT",
+      "method": "GET",
+      "operation_id": "get_export_snapshot",
+      "path": "/api/v1/exports/{export}/snapshots/{generation}",
+      "status": "implemented"
+    },
+    {
       "constant": "LIST_JOBS",
       "method": "GET",
       "operation_id": "list_jobs",
@@ -201,6 +278,13 @@
       "method": "GET",
       "operation_id": "get_job",
       "path": "/api/v1/jobs/{job}",
+      "status": "implemented"
+    },
+    {
+      "constant": "SOFTWARE_LIBRARY",
+      "method": "GET",
+      "operation_id": "software_library",
+      "path": "/api/v1/library/software",
       "status": "implemented"
     },
     {
@@ -524,83 +608,6 @@
       "method": "GET",
       "operation_id": "readyz",
       "path": "/readyz"
-    },
-    {
-      "constant": "LIST_EXPORTS",
-      "method": "GET",
-      "operation_id": "list_exports",
-      "path": "/api/v1/exports",
-      "status": "implemented"
-    },
-    {
-      "constant": "CREATE_EXPORT",
-      "method": "POST",
-      "operation_id": "create_export",
-      "path": "/api/v1/exports",
-      "status": "implemented"
-    },
-    {
-      "constant": "GET_EXPORT",
-      "method": "GET",
-      "operation_id": "get_export",
-      "path": "/api/v1/exports/{export}",
-      "status": "implemented"
-    },
-    {
-      "constant": "UPDATE_EXPORT",
-      "method": "PUT",
-      "operation_id": "update_export",
-      "path": "/api/v1/exports/{export}",
-      "status": "implemented"
-    },
-    {
-      "constant": "APPLY_EXPORT",
-      "method": "POST",
-      "operation_id": "apply_export",
-      "path": "/api/v1/exports/{export}/apply",
-      "status": "implemented"
-    },
-    {
-      "constant": "LIST_EXPORT_HISTORY",
-      "method": "GET",
-      "operation_id": "list_export_history",
-      "path": "/api/v1/exports/{export}/history",
-      "status": "implemented"
-    },
-    {
-      "constant": "PLAN_EXPORT",
-      "method": "POST",
-      "operation_id": "plan_export",
-      "path": "/api/v1/exports/{export}/plan",
-      "status": "implemented"
-    },
-    {
-      "constant": "CREATE_EXPORT_READER",
-      "method": "POST",
-      "operation_id": "create_export_reader",
-      "path": "/api/v1/exports/{export}/readers",
-      "status": "implemented"
-    },
-    {
-      "constant": "REVOKE_EXPORT_READERS",
-      "method": "POST",
-      "operation_id": "revoke_export_readers",
-      "path": "/api/v1/exports/{export}/readers/revoke",
-      "status": "implemented"
-    },
-    {
-      "constant": "EXPORT_REPOSITORY",
-      "method": "GET",
-      "operation_id": "export_repository",
-      "path": "/api/v1/exports/{export}/repository/{kind}/{name}",
-      "status": "implemented"
-    },
-    {
-      "constant": "GET_EXPORT_SNAPSHOT",
-      "method": "GET",
-      "operation_id": "get_export_snapshot",
-      "path": "/api/v1/exports/{export}/snapshots/{generation}",
-      "status": "implemented"
     }
   ]
 }

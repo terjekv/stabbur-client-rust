@@ -434,6 +434,8 @@ mod parity {
         let _ = blocking::CatalogResource::plan_validated;
         let _ = r#async::CatalogResource::sync_validated;
         let _ = blocking::CatalogResource::sync_validated;
+        let _ = r#async::SoftwareResource::library;
+        let _ = blocking::SoftwareResource::library;
         let _ = r#async::SoftwareResource::status;
         let _ = blocking::SoftwareResource::status;
         let _ = r#async::SoftwareResource::withdraw;

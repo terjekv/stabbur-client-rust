@@ -779,6 +779,25 @@ pub struct SoftwareResource {
     client: Client<Authenticated>,
 }
 impl SoftwareResource {
+    /// Searches the complete library and returns one page of aggregate summaries.
+    pub fn library(
+        &self,
+        query: &crate::LibraryQuery,
+        cursor: Option<&str>,
+        limit: u32,
+    ) -> Result<CursorPage<crate::LibraryEntry>, ApiError> {
+        validate_page(limit)?;
+        let mut request = self
+            .client
+            .request(Method::GET, endpoints::SOFTWARE_LIBRARY)
+            .query(query)
+            .query(&[("limit", limit.to_string())]);
+        if let Some(cursor) = cursor {
+            request = request.query(&[("cursor", cursor)]);
+        }
+        decode(request.send().map_err(|_| ApiError::Transport)?)
+    }
+
     /// Lists one cursor page.
     pub fn list(&self, cursor: Option<&str>, limit: u32) -> Result<CursorPage<Software>, ApiError> {
         page(&self.client, endpoints::SOFTWARE, cursor, limit)

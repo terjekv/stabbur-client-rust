@@ -6,6 +6,7 @@ pub(crate) const ME: &str = "/api/v1/auth/me";
 pub(crate) const PASSWORD: &str = "/api/v1/auth/password";
 pub(crate) const PRINCIPALS: &str = "/api/v1/auth/principals";
 pub(crate) const ROLES: &str = "/api/v1/auth/roles";
+pub(crate) const SOFTWARE_LIBRARY: &str = "/api/v1/library/software";
 pub(crate) const SOFTWARE: &str = "/api/v1/software";
 pub(crate) const RECIPES: &str = "/api/v1/recipes";
 pub(crate) const RECIPE_CATALOGS: &str = "/api/v1/recipe-catalogs";

@@ -384,6 +384,11 @@ pub const ROTATE_WORKER_TOKEN: Operation = Operation {
     method: "POST",
     path: "/api/v1/workers/{worker}/rotate-token",
 };
+/// `software_library`.
+pub const SOFTWARE_LIBRARY: Operation = Operation {
+    method: "GET",
+    path: "/api/v1/library/software",
+};
 /// `software_status`.
 pub const SOFTWARE_STATUS: Operation = Operation {
     method: "GET",

@@ -1238,6 +1238,12 @@ pub struct SoftwareStatus {
 /// Durable queue and worker measurements.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct OperationalStatus {
+    /// Up to 200 capability groups; empty for older servers.
+    #[serde(default)]
+    pub capability_queues: Vec<CapabilityQueue>,
+    /// Further groups were omitted.
+    #[serde(default)]
+    pub capability_queues_truncated: bool,
     /// Queued jobs.
     pub queued_jobs: u64,
     /// Leased jobs.
@@ -1250,4 +1256,19 @@ pub struct OperationalStatus {
     pub draining_workers: u64,
     /// Oldest queued job creation time.
     pub oldest_queued_at: Option<DateTime<Utc>>,
+}
+
+/// Queue pressure for one complete capability set.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct CapabilityQueue {
+    /// Requirements that must match on one worker.
+    pub required_capabilities: Vec<String>,
+    /// Queued jobs.
+    pub queued_jobs: u64,
+    /// Recent enabled matching workers.
+    pub matching_workers: u64,
+    /// Matching workers with unexpired leases; not configured concurrency.
+    pub workers_with_active_leases: u64,
+    /// Oldest queued work.
+    pub oldest_queued_at: DateTime<Utc>,
 }

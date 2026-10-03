@@ -408,3 +408,42 @@ async fn repository_reader_is_redacted_and_only_used_as_scoped_basic_auth() {
     assert!(request.to_lowercase().contains("authorization: basic "));
     assert!(!request.to_lowercase().contains("bearer"));
 }
+
+#[cfg(feature = "blocking")]
+#[test]
+fn library_search_encodes_literal_text_and_preserves_cursors() {
+    use stabbur_client::{LibraryQuery, LibrarySort, LibraryView};
+    assert!(LibraryQuery::new("bad\nquery", LibraryView::All, LibrarySort::Name).is_err());
+    let (url, request) = mock_once("200 OK", r#"{"items":[],"next_cursor":"opaque+cursor"}"#);
+    let client = stabbur_client::blocking::Client::from_url(&url)
+        .unwrap()
+        .authenticate(SecretToken::new("fixture-secret-token").unwrap());
+    let query = LibraryQuery::new("A&B %_", LibraryView::Attention, LibrarySort::Newest).unwrap();
+    let page = client
+        .software()
+        .library(&query, Some("prior+cursor"), 17)
+        .unwrap();
+    assert_eq!(page.next_cursor.as_deref(), Some("opaque+cursor"));
+    let request = request.join().unwrap();
+    assert!(request.starts_with("GET /api/v1/library/software?"));
+    assert!(request.contains("q=A%26B+%25_"));
+    assert!(request.contains("view=attention&sort=newest"));
+    assert!(request.contains("cursor=prior%2Bcursor"));
+}
+
+#[cfg(feature = "async")]
+#[tokio::test]
+async fn async_library_search_uses_the_same_contract() {
+    use stabbur_client::{LibraryQuery, LibrarySort, LibraryView};
+    let (url, request) = mock_once("200 OK", r#"{"items":[],"next_cursor":null}"#);
+    let client = stabbur_client::Client::from_url(&url)
+        .unwrap()
+        .authenticate(SecretToken::new("fixture-secret-token").unwrap());
+    let query = LibraryQuery::new("", LibraryView::Review, LibrarySort::Name).unwrap();
+    let page = client.software().library(&query, None, 25).await.unwrap();
+    assert!(page.next_cursor.is_none());
+    let request = request.join().unwrap();
+    assert!(request.starts_with("GET /api/v1/library/software?"));
+    assert!(request.contains("view=review&sort=name"));
+    assert!(request.contains("limit=25"));
+}

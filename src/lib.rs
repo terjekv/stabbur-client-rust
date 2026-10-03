@@ -73,3 +73,8 @@ pub use catalog::{SourcePinChange, SourceUpdateProposal, ValidatedSourcePin};
 /// Saved batch exports and Munki destination models.
 pub mod exports;
 pub use types::ExportId;
+
+mod library;
+pub use library::{LibraryEntry, LibraryQuery, LibrarySort, LibraryView};
+
+pub use types::CapabilityQueue;

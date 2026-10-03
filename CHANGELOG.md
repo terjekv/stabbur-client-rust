@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add validated `LibraryQuery`, `LibraryView`, `LibrarySort`, and paginated software library
+  summaries with async/blocking parity. Search and attention filters require the development server.
+- Add capability queue observations to operational status. Older JSON remains readable; Rust
+  struct literals must initialize `capability_queues` and `capability_queues_truncated`.
+
+
 - Add typed saved-export definitions, batch plans, immutable snapshots and scoped repository readers with async/blocking parity. New export methods require the coordinated development server; the released 0.0.1 image does not implement them.
 
 - Add optional observed recipe guidance to catalog entries and the pinned API contract.

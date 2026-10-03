@@ -844,6 +844,25 @@ pub struct SoftwareResource {
 }
 
 impl SoftwareResource {
+    /// Searches the complete library and returns one page of aggregate summaries.
+    pub async fn library(
+        &self,
+        query: &crate::LibraryQuery,
+        cursor: Option<&str>,
+        limit: u32,
+    ) -> Result<CursorPage<crate::LibraryEntry>, ApiError> {
+        validate_page(limit)?;
+        let mut request = self
+            .client
+            .request(Method::GET, endpoints::SOFTWARE_LIBRARY)
+            .query(query)
+            .query(&[("limit", limit.to_string())]);
+        if let Some(cursor) = cursor {
+            request = request.query(&[("cursor", cursor)]);
+        }
+        decode(request.send().await.map_err(|_| ApiError::Transport)?).await
+    }
+
     /// Lists one cursor page.
     pub async fn list(
         &self,
